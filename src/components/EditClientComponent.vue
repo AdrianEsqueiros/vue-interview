@@ -109,7 +109,7 @@
                     </div>
                     <div class="col">
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
                         placeholder="Amount"
                         aria-label="Amount"
@@ -156,7 +156,13 @@ export default {
         phone: "",
         email: "",
         address: "",
-        payments: [{}],
+        payments: [
+          {
+            transaction: "",
+            amount: 0,
+            date: "",
+          },
+        ],
       },
     };
   },
@@ -189,15 +195,6 @@ export default {
     };
   },
   methods: {
-    /*validateEmail(value) {
-      console.log("value:", value);
-      if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
-        this.msg.email = "";
-      } else {
-        this.msg.email = "Invalid Email Address";
-      }
-    },
-*/
     addPayment() {
       if (this.clientData.payments.length < 5)
         this.clientData.payments.push({
@@ -233,11 +230,14 @@ export default {
     updateClient: async function () {
       // this.client.payments = this.payments;
       try {
-        await this.clientsService
-          .updateClient(this.clientData, this.$route.params.id)
-          .then(() => {
-            this.$router.push({ name: "home" });
-          });
+        // this.clientData.payments.forEach((item) => {
+        //   item.amount = parseInt(item.amount);
+        // });
+        await this.clientsService.updateClientWithPayments(
+          this.clientData,
+          this.$route.params.id
+        );
+        await this.$router.push({ name: "home" });
       } catch (error) {
         console.log(error);
       }
