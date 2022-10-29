@@ -113,6 +113,7 @@
                         class="form-control"
                         placeholder="Amount"
                         aria-label="Amount"
+                        step=".01"
                         v-model="payment.amount"
                       />
                     </div>
@@ -159,7 +160,7 @@ export default {
         payments: [
           {
             transaction: "",
-            amount: 0,
+            amount: 0.0,
             date: "",
           },
         ],
@@ -233,9 +234,10 @@ export default {
         // this.clientData.payments.forEach((item) => {
         //   item.amount = parseInt(item.amount);
         // });
-        await this.clientsService.updateClientWithPayments(
+        await this.clientsService.insertUpdateClientWithPayments(
           this.clientData,
-          this.$route.params.id
+          this.$route.params.id,
+          1
         );
         await this.$router.push({ name: "home" });
       } catch (error) {

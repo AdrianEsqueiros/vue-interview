@@ -167,7 +167,10 @@ export default {
     async create() {
       // this.client.payments = this.payments;
       await this.clientsService
-        .createClientWithPayment({ ...this.client, payments: this.payments })
+        .insertUpdateClientWithPayments(
+          { ...this.client, payments: this.payments },
+
+        )
         .then(() => {
           this.$router.push({ name: "home" });
         })

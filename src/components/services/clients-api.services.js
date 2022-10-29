@@ -14,7 +14,7 @@ export class ClientsApiServices {
   deleteClient(id) {
     return http.delete(`/clients/${id}`);
   }
-  updateClientWithPayments(data, id) {
+  insertUpdateClientWithPayments(data, id,) {
     return http.put(`/clients/${id}`, data);
   }
   getClientById(id) {

@@ -108,10 +108,6 @@ export default {
 
         // console.log("clien111ts: ", this.clients);
       });
-      await this.paymentsService.getTotalAmount().then((response) => {
-        this.payments = response.data;
-        // console.log(this.payments);
-      });
     },
     deleteClient(id) {
       if (confirm("Are you sure you want to delete this client?")) {
